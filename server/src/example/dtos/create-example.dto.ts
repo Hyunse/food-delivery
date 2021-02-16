@@ -1,13 +1,7 @@
-import { ArgsType, Field } from "@nestjs/graphql";
+import { Field, InputType, OmitType } from '@nestjs/graphql';
+import { Example } from '../entities/example.entity';
 
-@ArgsType()
-export class CreateExampleDto {
-  @Field(() => String)
-  name: string;
-
-  @Field(() => Boolean, { nullable: true })
-  isExample?: boolean;
-
-  @Field(() => Number, { nullable: true})
-  age: number;
+@InputType()
+export class CreateExampleDto extends OmitType(Example, ['id']) {
+  
 }
