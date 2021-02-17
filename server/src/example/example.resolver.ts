@@ -41,6 +41,7 @@ export class ExampleResolver {
     @Args('input') updateExampleDto: UpdateExampleDto,
   ): Promise<boolean> {
     try {
+      await this.exampleService.updateExxample(updateExampleDto);
       return true;
     } catch (e) {
       console.log(e);

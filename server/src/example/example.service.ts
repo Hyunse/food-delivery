@@ -8,6 +8,7 @@ import { Example } from './entities/example.entity';
 @Injectable()
 export class ExampleService {
   constructor(
+    // Inejct Repository
     @InjectRepository(Example) private readonly examples: Repository<Example>,
   ) {}
   getAll(): Promise<Example[]> {
