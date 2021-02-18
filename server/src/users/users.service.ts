@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from 'src/jwt/jwt.service';
 import { Repository } from 'typeorm';
 import { CreateAccountInput } from './dto/create-account.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
@@ -9,6 +10,7 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
+    private readonly jwtService: JwtService
   ) {}
 
   async createAccount({
@@ -46,6 +48,7 @@ export class UsersService {
     try {
       const user = await this.users.findOne({ email });
 
+      console.log(this.jwtService.hello());
       if (!user) {
         return {
           ok: false,
