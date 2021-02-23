@@ -48,7 +48,6 @@ export class UsersService {
     try {
       const user = await this.users.findOne({ email });
 
-      console.log(this.jwtService.hello());
       if (!user) {
         return {
           ok: false,
@@ -66,10 +65,16 @@ export class UsersService {
         };
       }
 
+      const token = this.jwtService.sign(user.id);
+
       return {
         ok: true,
-        token: 'ok',
+        token: token,
       };
     } catch (error) {}
+  }
+
+  async findById(id: number): Promise<User> {
+    return this.users.findOne({ id });
   }
 }
